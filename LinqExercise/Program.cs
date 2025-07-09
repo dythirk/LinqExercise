@@ -95,13 +95,23 @@ namespace LinqExercise
             var overTwentySix = employees.Where(emp => emp.Age > 26).OrderBy(emp => emp.Age).ThenBy(emp => emp.FirstName);
             Console.WriteLine("\nOver 26 Age sorted:");
             foreach (var person in overTwentySix) 
-            Console.WriteLine($"Full name: {person.FullName} Age: {person.Age}");
+            Console.WriteLine($"Full name: {person.FullName} Age: {person.Age} YOE: {person.YearsOfExperience}");
+
             //TODO: Print the Sum of the employees' YearsOfExperience if their YOE is less than or equal to 10 AND Age is greater than 35.
+
+            var yoeEmployees = employees.Where(x => x.YearsOfExperience <= 10 && x.Age > 35);
+            var sumOfYoe = yoeEmployees.Sum(emp => emp.YearsOfExperience);
 
             //TODO: Now print the Average of the employees' YearsOfExperience if their YOE is less than or equal to 10 AND Age is greater than 35.
 
+            var avgOfYoe = yoeEmployees.Average(emp => emp.YearsOfExperience);
+            Console.WriteLine($"\nSum of YOE: {sumOfYoe} Avg YOI: {avgOfYoe}");
+
             //TODO: Add an employee to the end of the list without using employees.Add()
 
+            employees = employees.Append(new Employee("first", "last", 98, 1)).ToList();
+            foreach (var employee in employees)
+                Console.WriteLine(employee.FirstName);
 
             Console.WriteLine();
 
